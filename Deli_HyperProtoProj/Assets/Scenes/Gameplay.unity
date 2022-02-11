@@ -1542,7 +1542,8 @@ PrefabInstance:
       propertyPath: m_Name
       value: Idle
       objectReference: {fileID: 0}
-    m_RemovedComponents: []
+    m_RemovedComponents:
+    - {fileID: -6057140222963153312, guid: 27aa10c1be9cc6b4f86cf7a3c8126e42, type: 3}
   m_SourcePrefab: {fileID: 100100000, guid: 27aa10c1be9cc6b4f86cf7a3c8126e42, type: 3}
 --- !u!4 &906823538 stripped
 Transform:
@@ -1713,7 +1714,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1087095668}
   m_LocalRotation: {x: 0.57239383, y: -0.000000007054434, z: 0.0000000049244138, w: 0.81997883}
-  m_LocalPosition: {x: 0, y: 27.23, z: -10}
+  m_LocalPosition: {x: 0, y: 29.865, z: -10}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 588898881}
@@ -1949,7 +1950,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1200606701}
   m_LocalRotation: {x: 0.57239383, y: -0.000000007054434, z: 0.0000000049244138, w: 0.81997883}
-  m_LocalPosition: {x: 0, y: 27.23, z: -10}
+  m_LocalPosition: {x: 0, y: 29.865, z: -10}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
@@ -2132,6 +2133,7 @@ GameObject:
   - component: {fileID: 1541785075}
   - component: {fileID: 1541785077}
   - component: {fileID: 1541785076}
+  - component: {fileID: 1541785078}
   m_Layer: 0
   m_Name: Player
   m_TagString: Untagged
@@ -2147,7 +2149,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1541785074}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalPosition: {x: 0, y: 2.635, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 906823538}
@@ -2166,6 +2168,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: cdfeefc440e392e4da21db2c421d4af2, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  rotationFactorPerFrame: 30
+  playerSpeed: 10
 --- !u!143 &1541785077
 CharacterController:
   m_ObjectHideFlags: 0
@@ -2184,6 +2188,25 @@ CharacterController:
   m_SkinWidth: 0.08
   m_MinMoveDistance: 0.001
   m_Center: {x: 0, y: 2.09, z: 0}
+--- !u!95 &1541785078
+Animator:
+  serializedVersion: 3
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1541785074}
+  m_Enabled: 1
+  m_Avatar: {fileID: 9000000, guid: 27aa10c1be9cc6b4f86cf7a3c8126e42, type: 3}
+  m_Controller: {fileID: 9100000, guid: 1095016338410674ba24de48a5c50853, type: 2}
+  m_CullingMode: 0
+  m_UpdateMode: 0
+  m_ApplyRootMotion: 0
+  m_LinearVelocityBlending: 0
+  m_WarningMessage: 
+  m_HasTransformHierarchy: 1
+  m_AllowConstantClipSamplingOptimization: 1
+  m_KeepAnimatorControllerStateOnDisable: 0
 --- !u!1001 &1543402914
 PrefabInstance:
   m_ObjectHideFlags: 0

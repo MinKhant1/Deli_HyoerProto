@@ -20,7 +20,7 @@ public class @PI : IInputActionCollection, IDisposable
             ""actions"": [
                 {
                     ""name"": ""Move"",
-                    ""type"": ""PassThrough"",
+                    ""type"": ""Value"",
                     ""id"": ""b6e67c08-5a7e-4892-89ea-c3b96f17b3ee"",
                     ""expectedControlType"": ""Vector2"",
                     ""processors"": ""NormalizeVector2"",
