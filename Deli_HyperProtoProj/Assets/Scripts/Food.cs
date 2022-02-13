@@ -7,7 +7,7 @@ public class Food : MonoBehaviour
 {
 
     Collector collector;
-    bool _collected;
+   public bool Collected;
 
     Tweener _moveToCollector;
 
@@ -24,17 +24,26 @@ public class Food : MonoBehaviour
 
     private void Update()
     {
-        _stackY = collector.number * 0.3f;
+        
     }
 
    
 
     public void GoTostack()
     {
-     
-        transform.SetParent(collector.CunrrentStackTransform);
-       
-        transform.DOLocalMove(new Vector3(0, _stackY*2f, 0), 0.2f).OnComplete(()=> transform.DOLocalMove(new Vector3(0, _stackY, 0), 0.2f));
-     
+
+        collector.Collect();
+
+        _stackY = collector.CurrentStackY;
+      
+        transform.SetParent(collector.StackParent.transform);
+        print(_stackY);
+        var sequence = DOTween.Sequence();
+        sequence.Append(transform.DOLocalMove(new Vector3(0, _stackY+2f , 0), 0.2f));
+        sequence.Append(transform.DOLocalMove(new Vector3(0, _stackY, 0), 0.2f));
+        collector.CurrentStackY += 0.5f;
+        //transform.DOLocalMove(new Vector3(0, _stackY+2f, 0), 0.2f).OnComplete(()=> transform.DOLocalMove(new Vector3(0, _stackY-2f, 0), 0.2f).OnComplete(()=>DOTween.Kill(transform)));
+
+
     }
 }
