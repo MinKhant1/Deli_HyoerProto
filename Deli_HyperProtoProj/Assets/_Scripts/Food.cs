@@ -10,12 +10,18 @@ public class Food : MonoBehaviour
     public bool Collected;
 
     Tweener _moveToCollector;
-
     Vector3 _lastCollectorPosition;
-
     float _stackY;
 
     IEnumerator SpawnFoodRoutine;
+
+
+
+    public FoodType FoodType;
+
+    
+   public float foodSizeY=0.8f;
+
 
     private void Start()
     {
@@ -23,21 +29,26 @@ public class Food : MonoBehaviour
     }
     public void GoTostack()
     {
-        FoodSpawner foodSpawner=transform.parent.GetComponent<FoodSpawner>();
+        FoodSpawner foodSpawner = transform.parent.GetComponent<FoodSpawner>();
 
         foodSpawner.Spawned = false;
-     
+
 
         _stackY = collector.CurrentStackY;
 
         transform.SetParent(collector.StackParent.transform, true);
 
         var sequence = DOTween.Sequence();
+        
         sequence.Append(transform.DOLocalMove(new Vector3(0, _stackY + 2f, 0), 0.2f));
         sequence.Append(transform.DOLocalMove(new Vector3(0, _stackY, 0), 0.2f));
-        collector.CurrentStackY += 0.8f;
+        collector.CurrentStackY +=foodSizeY;
+    }
 
-      
+    public void GoToCustomer(Transform customer)
+    {
+       
+        transform.DOMove(customer.position, 0.2f).OnComplete(()=>Destroy(gameObject));
 
 
     }

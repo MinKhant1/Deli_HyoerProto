@@ -109,3 +109,5 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   Collected: 0
+  FoodType: {fileID: 11400000, guid: c62734fc9b39091469223acd1a9fc5b9, type: 2}
+  foodSizeY: 0.8
