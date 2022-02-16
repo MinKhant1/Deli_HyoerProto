@@ -8,13 +8,20 @@ public class Customer : MonoBehaviour
 {
 
     public List<Order> orders = new List<Order>();
-
+    
     [SerializeField]
     GameObject _foodUi;
     [SerializeField]
     GameObject _customerUiParent;
 
-    public bool OrderComplete;
+
+
+    [SerializeField]
+    GameObject money;
+
+    public float Payment;
+
+     bool paid;
 
 
 
@@ -26,7 +33,15 @@ public class Customer : MonoBehaviour
 
     private void Update()
     {
-
+       if(OrderDone())
+        {
+           
+            if(!paid)
+            {
+                Pay();
+                paid = true;
+            }
+        }
     }
 
     public void MakeOrder()
@@ -36,25 +51,48 @@ public class Customer : MonoBehaviour
             GameObject foodui = Instantiate(_foodUi, _customerUiParent.transform);
             foodui.GetComponentInChildren<Image>().sprite = order.OrderedFood.FoodImage;
             foodui.GetComponentInChildren<TextMeshProUGUI>().text = "X" + order.NumberOfFood;
+            order.orderUi = foodui;
 
         }
     }
-    //public void ValideOrder(FoodType food)
-    //{
-    //    for (int i = 0; i < orders.Count - 1; i++)
-    //    {
+    public void ValideOrder(FoodType food)
+    {
+        for (int i = 0; i <= orders.Count - 1; i++)
+        {
+            if (orders[i].OrderedFood == food)
+            {
 
-    //        if (orders[i].OrderedFood == food)
-    //        {
-    //            orders[i].NumberOfFood--;
-    //        }
-    //    }
+             orders[i].NumberOfFood--;
+              orders[i].orderUi.GetComponentInChildren<TextMeshProUGUI>().text = "X" + orders[i].NumberOfFood;
+            }
+        }
 
-    //}
+    }
 
+    public bool OrderDone()
+    {
+        foreach (Order order in orders.ToArray())
+        {
+            if (order.NumberOfFood > 0)
+            {
+                return false;
+            }
+            else
+            {
+                orders.Remove(order);
+                Destroy(order.orderUi);
 
+            }
+        }
+        return true;
+    }
 
-
+    public void Pay()
+    {
+         GameObject moneyScript= Instantiate(money, transform.position, Quaternion.identity);
+        moneyScript.GetComponent<MoneyScript>().Amount = 25;
+        Destroy(gameObject);
+    }
 
 }
 
@@ -62,6 +100,9 @@ public class Customer : MonoBehaviour
 public class Order
 {
     public FoodType OrderedFood;
+
     public int NumberOfFood;
+
+    public GameObject orderUi;
 
 }

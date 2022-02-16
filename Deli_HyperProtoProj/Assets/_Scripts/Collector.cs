@@ -1,24 +1,28 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-
+using TMPro;
 public class Collector : MonoBehaviour
 {
     public GameObject StackParent;
-
     public float CurrentStackY;
-
     public List<Food> foodsCarrying = new List<Food>();
 
 
 
 
-    public int number;
+    public int Number;
+    public int carryLimit;
+
+   
 
     Vector3 _position;
 
     IEnumerator TransferFood;
 
+
+    public int Money;
+    [SerializeField] TextMeshProUGUI _moneyGUI;
 
     private void Start()
     {
@@ -28,13 +32,14 @@ public class Collector : MonoBehaviour
     public void Collect()
     {
 
-        number++;
+        Number++;
         transform.position = _position;
     }
 
 
     private void OnTriggerEnter(Collider other)
     {
+        if(Number<=carryLimit)
         if (other.gameObject.TryGetComponent(out Food food))
         {
 
@@ -54,6 +59,12 @@ public class Collector : MonoBehaviour
         {
             TransferFood = TransferFoodToCustomer(customer);
             StartCoroutine(TransferFood);
+        }
+
+        if (other.gameObject.TryGetComponent(out MoneyScript money))
+        {
+            SetMoney(money.Amount);
+            Destroy(other.gameObject);
         }
 
     }
@@ -84,10 +95,12 @@ public class Collector : MonoBehaviour
             foreach (Order order in customer.orders)
             {
 
-                if (item.FoodType == order.OrderedFood)
+                if (item.FoodType == order.OrderedFood && order.NumberOfFood>0)
                 {
                     item.GoToCustomer(customer.gameObject.transform);
                     CurrentStackY -= item.foodSizeY;
+                    customer.ValideOrder(item.FoodType);
+                    Number--;
                     foodsCarrying.Remove(item);
                     yield return new WaitForSeconds(0.1f);
                 }
@@ -95,28 +108,24 @@ public class Collector : MonoBehaviour
 
         }
 
-        //for (int i = foodsCarrying.Count-1; i >= 0; i--)
-        //{
+       
+    }
 
-        //    foreach (Order order in customer.orders)
-        //    {
-        //        if (foodsCarrying[i].FoodType == order.OrderedFood)
-        //        {
-        //            foodsCarrying[i].GoToCustomer(customer.gameObject.transform);
-        //            //customer.ValideOrder(foodsCarrying[i].FoodType);
-        //            CurrentStackY -= foodsCarrying[i].foodSizeY;
-        //            foodsCarrying.Remove(foodsCarrying[i]);
-
-        //            yield return new WaitForSeconds(0.1f);
-        //        }
-        //    }
-        //}
+    public IEnumerator TransferMoney()
+    {
+        yield return new WaitForSeconds(0.1f);
     }
 
     public void AddFood(Food food)
     {
         foodsCarrying.Add(food);
 
+    }
+
+    public void SetMoney(int amount)
+    {
+        Money += amount;
+        _moneyGUI.text = Money.ToString();
     }
 
 }
