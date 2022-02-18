@@ -30,7 +30,7 @@ public class Collector : MonoBehaviour
     {
         CurrentStackY = 0f;
         _position = transform.position;
-        SetMoney(200);
+       
     }
     public void Collect()
     {

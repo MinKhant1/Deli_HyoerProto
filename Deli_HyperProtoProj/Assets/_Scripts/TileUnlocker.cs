@@ -5,9 +5,12 @@ using TMPro;
 
 public class TileUnlocker : MonoBehaviour
 {
+    [HideInInspector]
     public int Cost;
+    [HideInInspector]
     public int CostLeft;
     public GameObject TileToUnlock;
+    public GameObject TileBank;
 
     public GameObject UIObject;
     TextMeshProUGUI moneyText;
@@ -45,6 +48,7 @@ public class TileUnlocker : MonoBehaviour
     public void UnlockTile()
     {
         TileToUnlock.SetActive(true);
+        TileBank.SetActive(false);
         GetComponent<Collider>().enabled = false;
         UIObject.SetActive(false);
     }
