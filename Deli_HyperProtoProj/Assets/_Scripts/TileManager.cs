@@ -6,7 +6,7 @@ public class TileManager : MonoBehaviour
 {
     public List<TileData> TileDatas = new List<TileData>();
 
-    private void Start()
+    private void Awake()
     {
         foreach (TileData data in TileDatas)
         {
@@ -15,6 +15,7 @@ public class TileManager : MonoBehaviour
             data.Unlocker.TileBank = data.TileBank;
         }
     }
+  
 
 
 }

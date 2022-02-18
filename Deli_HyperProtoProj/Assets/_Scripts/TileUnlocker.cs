@@ -7,11 +7,15 @@ public class TileUnlocker : MonoBehaviour
 {
     [HideInInspector]
     public int Cost;
+
     [HideInInspector]
     public int CostLeft;
+    [HideInInspector]
     public GameObject TileToUnlock;
+    [HideInInspector]
     public GameObject TileBank;
 
+    [HideInInspector]
     public GameObject UIObject;
     TextMeshProUGUI moneyText;
 

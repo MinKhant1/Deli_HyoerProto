@@ -126,7 +126,7 @@ public class Collector : MonoBehaviour
                     customer.ValideOrder(item.FoodType);
                     CarryNumber--;
                     foodsCarrying.Remove(item);
-                    yield return new WaitForSeconds(0.1f);
+                    yield return new WaitForSeconds(0.2f);
                 }
             }
 
@@ -140,10 +140,10 @@ public class Collector : MonoBehaviour
         while (Money > 0 && !tileUnlocker.TileUnlocked)
         {
             GameObject money = Instantiate(_moneyObj, transform.position, Quaternion.identity);
-            money.transform.DOMove(tileUnlocker.Target.position, .2f).OnComplete(()=>Destroy(money.gameObject));
+            money.transform.DOMove(tileUnlocker.Target.position, .4f).OnComplete(()=>Destroy(money.gameObject));
             tileUnlocker.ReceiveMoney();
             Money -= 5;
-            yield return new WaitForSeconds(0.1f);
+            yield return new WaitForSeconds(0.3f);
 
         }
     }
