@@ -5,23 +5,19 @@ using TMPro;
 using DG.Tweening;
 public class Collector : MonoBehaviour
 {
+    [Header("Transfering Food")]
     public GameObject StackParent;
     public float CurrentStackY;
     public List<Food> foodsCarrying = new List<Food>();
-
-
-
-
-    public int Number;
+    public int CarryNumber;
     public int carryLimit;
-
-
-
     Vector3 _position;
-
     IEnumerator TransferFood;
+    [SerializeField] GameObject MaxUi;
+    
 
 
+    [Header("Money")]
     public int Money;
     [SerializeField] TextMeshProUGUI _moneyGUI;
     [SerializeField] GameObject _moneyObj;
@@ -32,17 +28,30 @@ public class Collector : MonoBehaviour
         _position = transform.position;
        
     }
+
+    private void Update()
+    {
+        if(CarryNumber==carryLimit)
+        {
+            MaxUi.SetActive(true);
+        }
+        else
+        {
+            MaxUi.SetActive(false);
+        }
+        
+    }
     public void Collect()
     {
 
-        Number++;
+        CarryNumber++;
         transform.position = _position;
     }
 
 
     private void OnTriggerEnter(Collider other)
     {
-        if (Number < carryLimit)
+        if (CarryNumber < carryLimit)
             if (other.gameObject.TryGetComponent(out Food food))
             {
 
@@ -115,7 +124,7 @@ public class Collector : MonoBehaviour
                     item.GoToCustomer(customer.gameObject.transform);
                     CurrentStackY -= item.foodSizeY;
                     customer.ValideOrder(item.FoodType);
-                    Number--;
+                    CarryNumber--;
                     foodsCarrying.Remove(item);
                     yield return new WaitForSeconds(0.1f);
                 }

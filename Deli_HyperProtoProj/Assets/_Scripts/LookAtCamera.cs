@@ -18,7 +18,7 @@ public class LookAtCamera : MonoBehaviour
 
     }
 
-    private void Update()
+    private void FixedUpdate()
     {
         transform.LookAt(transform.position + _cameraTransform.rotation * Vector3.forward, _cameraTransform.rotation * Vector3.up);
     }
