@@ -42,7 +42,7 @@ public class Collector : MonoBehaviour
 
     private void OnTriggerEnter(Collider other)
     {
-        if (Number <= carryLimit)
+        if (Number < carryLimit)
             if (other.gameObject.TryGetComponent(out Food food))
             {
 
