@@ -12,7 +12,7 @@ public class Collector : MonoBehaviour
     public int CarryNumber;
     public int carryLimit;
     Vector3 _position;
-    IEnumerator TransferFood;
+    IEnumerator _transferFoodRoutine;
     [SerializeField] GameObject MaxUi;
     
 
@@ -21,7 +21,7 @@ public class Collector : MonoBehaviour
     public int Money;
     [SerializeField] TextMeshProUGUI _moneyGUI;
     [SerializeField] GameObject _moneyObj;
-
+    IEnumerator _transferMoneyRoutine;
     private void Start()
     {
         CurrentStackY = 0f;
@@ -69,8 +69,8 @@ public class Collector : MonoBehaviour
 
         if (other.gameObject.TryGetComponent(out Customer customer))
         {
-            TransferFood = TransferFoodToCustomer(customer);
-            StartCoroutine(TransferFood);
+            _transferFoodRoutine = TransferFoodToCustomer(customer);
+            StartCoroutine(_transferFoodRoutine);
         }
 
         if (other.gameObject.TryGetComponent(out MoneyScript money))
@@ -82,8 +82,8 @@ public class Collector : MonoBehaviour
 
         if (other.gameObject.TryGetComponent(out TileUnlocker tileUnlocker))
         {
-
-           StartCoroutine( TransferMoney(tileUnlocker));
+            _transferMoneyRoutine = TransferMoney(tileUnlocker);
+           StartCoroutine(_transferMoneyRoutine);
 
 
 
@@ -99,15 +99,20 @@ public class Collector : MonoBehaviour
         if (other.CompareTag("Customer"))
         {
             foodsCarrying.Reverse();
-            if (TransferFood != null)
-                StopCoroutine(TransferFood);
+            if (_transferFoodRoutine != null)
+                StopCoroutine(_transferFoodRoutine);
+        }
+        if(other.CompareTag("TileUnlocker"))
+        {
+            if(_transferMoneyRoutine!=null)
+            {
+                StopCoroutine(_transferMoneyRoutine);
+            }
         }
 
     }
 
-    private void OnTriggerStay(Collider other)
-    {
-    }
+   
 
 
     public IEnumerator TransferFoodToCustomer(Customer customer)

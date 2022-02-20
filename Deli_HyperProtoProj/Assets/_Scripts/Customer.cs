@@ -46,14 +46,17 @@ public class Customer : MonoBehaviour
 
     public void MakeOrder()
     {
+       
         foreach (Order order in orders)
         {
+           
             GameObject foodui = Instantiate(_foodUi, _customerUiParent.transform);
             foodui.GetComponentInChildren<Image>().sprite = order.OrderedFood.FoodImage;
-            foodui.GetComponentInChildren<TextMeshProUGUI>().text = "X" + order.NumberOfFood;
+            foodui.GetComponentInChildren<TextMeshProUGUI>().text = order.NumberOfFood.ToString();
             order.orderUi = foodui;
 
         }
+        
     }
     public void ValideOrder(FoodType food)
     {
@@ -63,7 +66,7 @@ public class Customer : MonoBehaviour
             {
 
              orders[i].NumberOfFood--;
-              orders[i].orderUi.GetComponentInChildren<TextMeshProUGUI>().text = "X" + orders[i].NumberOfFood;
+              orders[i].orderUi.GetComponentInChildren<TextMeshProUGUI>().text =orders[i].NumberOfFood.ToString();
             }
         }
 
