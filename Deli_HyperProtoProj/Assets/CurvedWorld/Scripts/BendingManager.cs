@@ -24,7 +24,7 @@ public class BendingManager : MonoBehaviour
 
   [SerializeField]
   [Range(0.00f, 0.1f)]
-  private float bendingAmount = 0.015f;
+  public float bendingAmount = 0.015f;
 
   #endregion
 
