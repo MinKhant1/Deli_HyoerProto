@@ -41105,10 +41105,6 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 386672487}
     m_Modifications:
-    - target: {fileID: 5925774483852985484, guid: 8602efbce54b9ff498d8cf54736e9cf1, type: 3}
-      propertyPath: m_SizeDelta.y
-      value: 0.76
-      objectReference: {fileID: 0}
     - target: {fileID: 5925774484513789682, guid: 8602efbce54b9ff498d8cf54736e9cf1, type: 3}
       propertyPath: m_Name
       value: Customer

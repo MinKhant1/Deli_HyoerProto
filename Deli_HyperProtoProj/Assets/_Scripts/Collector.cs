@@ -75,7 +75,7 @@ public class Collector : MonoBehaviour
 
         if (other.gameObject.TryGetComponent(out MoneyScript money))
         {
-            SetMoney(money.Amount);
+            AddMoney(money.Amount);
             Destroy(other.gameObject);
         }
 
@@ -148,6 +148,7 @@ public class Collector : MonoBehaviour
             money.transform.DOMove(tileUnlocker.Target.position, .2f).OnComplete(()=>Destroy(money.gameObject));
             tileUnlocker.ReceiveMoney();
             Money -= 5;
+            _moneyGUI.text = Money.ToString();
             yield return new WaitForSeconds(0.2f);
 
         }
@@ -159,7 +160,7 @@ public class Collector : MonoBehaviour
 
     }
 
-    public void SetMoney(int amount)
+    public void AddMoney(int amount)
     {
         Money += amount;
         _moneyGUI.text = Money.ToString();
