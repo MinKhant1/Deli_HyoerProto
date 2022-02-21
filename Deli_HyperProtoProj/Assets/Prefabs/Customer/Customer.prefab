@@ -406,6 +406,7 @@ MonoBehaviour:
     orderUi: {fileID: 0}
   _foodUi: {fileID: 5882833641698045991, guid: bd0dfcaf6b1406e4297f0fabfec1b934, type: 3}
   _customerUiParent: {fileID: 5925774483852985487}
+  _deliveryPlaceUi: {fileID: 1355769413}
   money: {fileID: 3662182946888765823, guid: 17e77a164c65f9645bf769438bddba75, type: 3}
   Payment: 0
 --- !u!65 &5925774484513789681
