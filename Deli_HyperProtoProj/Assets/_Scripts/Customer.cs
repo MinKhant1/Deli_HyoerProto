@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 using TMPro;
+using UnityEngine.AI;
 
 public class Customer : MonoBehaviour
 {
@@ -14,14 +15,20 @@ public class Customer : MonoBehaviour
     [SerializeField]
     GameObject _customerUiParent;
 
+    bool _orderComplete;
+
 
 
     [SerializeField]
     GameObject money;
 
-    public float Payment;
 
-     bool paid;
+
+    public float Payment;
+    bool finish;
+    NavMeshAgent _agent;
+
+
 
 
 
@@ -33,13 +40,15 @@ public class Customer : MonoBehaviour
 
     private void Update()
     {
-       if(OrderDone())
+
+        _orderComplete = OrderDone();
+       if(_orderComplete)
         {
            
-            if(!paid)
+            if(!finish)
             {
-                Pay();
-                paid = true;
+                Finish();
+                finish = true;
             }
         }
     }
@@ -90,11 +99,46 @@ public class Customer : MonoBehaviour
         return true;
     }
 
-    public void Pay()
+    public void Finish()
     {
          GameObject moneyScript= Instantiate(money, transform.position, Quaternion.identity);
-        moneyScript.GetComponent<MoneyScript>().Amount = 25;
-        Destroy(gameObject);
+         moneyScript.GetComponent<MoneyScript>().Amount = 25;
+        
+    }
+
+    public GameObject FindNearestExit()
+    {
+        GameObject[] exits = GameObject.FindGameObjectsWithTag(Tags.CustomerExit);
+      
+        GameObject tMin = null;
+        float minDist = Mathf.Infinity;
+        Vector3 currentPos = transform.position;
+        foreach (GameObject t in exits)
+        {
+            float dist = Vector3.Distance(t.transform.position, currentPos);
+            if (dist < minDist)
+            {
+                tMin = t;
+                minDist = dist;
+            }
+        }
+        return tMin;
+
+
+    }
+
+    public bool pathComplete()
+    {
+        if (Vector3.Distance(_agent.destination, _agent.transform.position) <= _agent.stoppingDistance)
+        {
+            if (!_agent.hasPath || _agent.velocity.sqrMagnitude == 0f)
+            {
+                return true;
+            }
+        }
+
+
+        return false;
     }
 
 }
