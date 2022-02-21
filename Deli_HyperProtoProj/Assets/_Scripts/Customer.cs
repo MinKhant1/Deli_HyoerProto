@@ -32,6 +32,8 @@ public class Customer : MonoBehaviour
 
 
 
+    public CustomerSpawner customerSpawner;
+
 
 
     private void Start()
@@ -40,7 +42,7 @@ public class Customer : MonoBehaviour
         _anim = GetComponent<Animator>();
         MakeOrder();
 
-        
+
     }
 
 
@@ -60,6 +62,12 @@ public class Customer : MonoBehaviour
 
         if (_orderComplete && pathComplete())
         {
+
+            if (customerSpawner != null)
+            {
+                customerSpawner.Spawned = false;
+
+            }
             Destroy(gameObject);
         }
     }

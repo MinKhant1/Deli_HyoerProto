@@ -85,8 +85,6 @@ public class Collector : MonoBehaviour
             _transferMoneyRoutine = TransferMoney(tileUnlocker);
            StartCoroutine(_transferMoneyRoutine);
 
-
-
         }
 
 
