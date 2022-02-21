@@ -96,13 +96,13 @@ public class Collector : MonoBehaviour
     private void OnTriggerExit(Collider other)
     {
 
-        if (other.CompareTag("Customer"))
+        if (other.CompareTag(Tags.Customer))
         {
             foodsCarrying.Reverse();
             if (_transferFoodRoutine != null)
                 StopCoroutine(_transferFoodRoutine);
         }
-        if(other.CompareTag("TileUnlocker"))
+        if(other.CompareTag(Tags.TileUnlocker))
         {
             if(_transferMoneyRoutine!=null)
             {
