@@ -9,12 +9,13 @@ public class Customer : MonoBehaviour
 {
 
     public List<Order> orders = new List<Order>();
-    
+
     [SerializeField]
     GameObject _foodUi;
     [SerializeField]
     GameObject _customerUiParent;
-
+    [SerializeField]
+    GameObject _deliveryPlaceUi;
     bool _orderComplete;
 
 
@@ -27,6 +28,7 @@ public class Customer : MonoBehaviour
     public float Payment;
     bool finish;
     NavMeshAgent _agent;
+    Animator _anim;
 
 
 
@@ -34,7 +36,11 @@ public class Customer : MonoBehaviour
 
     private void Start()
     {
+        _agent = GetComponent<NavMeshAgent>();
+        _anim = GetComponent<Animator>();
         MakeOrder();
+
+        
     }
 
 
@@ -42,30 +48,35 @@ public class Customer : MonoBehaviour
     {
 
         _orderComplete = OrderDone();
-       if(_orderComplete)
+        if (_orderComplete && !finish)
         {
-           
-            if(!finish)
-            {
-                Finish();
-                finish = true;
-            }
+
+            Finish();
+            finish = true;
+
+
+
+        }
+
+        if (_orderComplete && pathComplete())
+        {
+            Destroy(gameObject);
         }
     }
 
     public void MakeOrder()
     {
-       
+
         foreach (Order order in orders)
         {
-           
+
             GameObject foodui = Instantiate(_foodUi, _customerUiParent.transform);
             foodui.GetComponentInChildren<Image>().sprite = order.OrderedFood.FoodImage;
             foodui.GetComponentInChildren<TextMeshProUGUI>().text = order.NumberOfFood.ToString();
             order.orderUi = foodui;
 
         }
-        
+
     }
     public void ValideOrder(FoodType food)
     {
@@ -74,8 +85,8 @@ public class Customer : MonoBehaviour
             if (orders[i].OrderedFood == food)
             {
 
-             orders[i].NumberOfFood--;
-              orders[i].orderUi.GetComponentInChildren<TextMeshProUGUI>().text =orders[i].NumberOfFood.ToString();
+                orders[i].NumberOfFood--;
+                orders[i].orderUi.GetComponentInChildren<TextMeshProUGUI>().text = orders[i].NumberOfFood.ToString();
             }
         }
 
@@ -101,15 +112,21 @@ public class Customer : MonoBehaviour
 
     public void Finish()
     {
-         GameObject moneyScript= Instantiate(money, transform.position, Quaternion.identity);
-         moneyScript.GetComponent<MoneyScript>().Amount = 25;
-        
+        GameObject moneyScript = Instantiate(money, transform.position, Quaternion.identity);
+        moneyScript.GetComponent<MoneyScript>().Amount = 25;
+
+        _customerUiParent.SetActive(false);
+        _deliveryPlaceUi.SetActive(false);
+
+        _anim.SetBool("Walk", true);
+        _agent.SetDestination(FindNearestExit().transform.position);
+
     }
 
     public GameObject FindNearestExit()
     {
         GameObject[] exits = GameObject.FindGameObjectsWithTag(Tags.CustomerExit);
-      
+
         GameObject tMin = null;
         float minDist = Mathf.Infinity;
         Vector3 currentPos = transform.position;
