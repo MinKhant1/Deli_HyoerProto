@@ -19,6 +19,10 @@ public class SoundManager : MonoBehaviour
             Destroy(gameObject);
         }
     }
+    private void Start()
+    {
+        Vibration.Init();
+    }
 
     public void PlaySound(AudioClip clip)
     {
@@ -27,7 +31,9 @@ public class SoundManager : MonoBehaviour
     public void PlaySoundAndVibrate(AudioClip clip)
     {
         _sfxSource.PlayOneShot(clip);
-        Handheld.Vibrate();
+        Vibration.Vibrate(100);
+        
+       
     }
 
 
