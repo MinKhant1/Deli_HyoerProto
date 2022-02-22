@@ -7,7 +7,7 @@ public class AnimationMovementController : MonoBehaviour
 
     PI playerInput;
     CharacterController characterController;
-    Animator animator;
+   public Animator animator;
 
 
     Vector2 currentMovementInput;
@@ -24,9 +24,10 @@ public class AnimationMovementController : MonoBehaviour
 
     private void Awake()
     {
+        animator = GetComponentInChildren<Animator>();
         playerInput = new PI();
         characterController = GetComponent<CharacterController>();
-        animator = GetComponent<Animator>();
+       
 
         isRunningHash = Animator.StringToHash("IsRunning");
 
