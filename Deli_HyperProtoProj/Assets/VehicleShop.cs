@@ -5,19 +5,21 @@ using UnityEngine;
 public class VehicleShop : MonoBehaviour
 {
 
+    public VehicleType vehicle;
+
 
     private void OnTriggerEnter(Collider other)
     {
-       if(other.CompareTag(Tags.Player))
+       if(other.TryGetComponent(out Player player))
         {
-            other.transform.Find("Hi").gameObject.SetActive(true);
-            if (Input.GetKeyDown(KeyCode.Space))
-            {
-                print("Hi");
-               
-
-            }
+            player.ChangeVehicleModel("Hi");
         }
         
+    }
+
+    public void ChangeVehicle(GameObject player)
+    {
+        player.GetComponent<AnimationMovementController>().playerSpeed = vehicle.Speed;
+        player.GetComponent<Collector>().carryLimit = vehicle.CarryLimit;
     }
 }

@@ -7,6 +7,7 @@ TagManager:
   - Customer
   - TileUnlocker
   - CustomerExit
+  - PlayerVehicle
   layers:
   - Default
   - TransparentFX

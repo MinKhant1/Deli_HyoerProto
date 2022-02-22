@@ -7,7 +7,7 @@ public class AnimationMovementController : MonoBehaviour
 
     PI playerInput;
     CharacterController characterController;
-   public Animator animator;
+   public Animator PlayerAnimator;
 
 
     Vector2 currentMovementInput;
@@ -16,15 +16,17 @@ public class AnimationMovementController : MonoBehaviour
 
     [SerializeField]
     float rotationFactorPerFrame;
-    [SerializeField]
-    float playerSpeed;
+    
+   public float playerSpeed;
 
 
     int isRunningHash;
 
+   
+
     private void Awake()
     {
-        animator = GetComponentInChildren<Animator>();
+        PlayerAnimator = GetComponentInChildren<Animator>();
         playerInput = new PI();
         characterController = GetComponent<CharacterController>();
        
@@ -80,14 +82,14 @@ public class AnimationMovementController : MonoBehaviour
 
     void handleAnimation()
     {
-        bool isRunning = animator.GetBool("IsRunning");
+        bool isRunning = PlayerAnimator.GetBool("IsRunning");
         if(isMovementPressed && !isRunning)
         {
-            animator.SetBool(isRunningHash, true);
+            PlayerAnimator.SetBool(isRunningHash, true);
         }
         else if(!isMovementPressed && isRunning)
         {
-            animator.SetBool(isRunningHash, false);
+            PlayerAnimator.SetBool(isRunningHash, false);
         }
     }
     void handleRotation()
@@ -113,4 +115,6 @@ public class AnimationMovementController : MonoBehaviour
     {
         playerInput.CharacterMovement.Disable();
     }
+
+   
 }
