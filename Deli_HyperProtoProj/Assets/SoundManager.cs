@@ -31,7 +31,7 @@ public class SoundManager : MonoBehaviour
     public void PlaySoundAndVibrate(AudioClip clip)
     {
         _sfxSource.PlayOneShot(clip);
-        Vibration.Vibrate(100);
+        Vibration.Vibrate(1);
         
        
     }
