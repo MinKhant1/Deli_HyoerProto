@@ -22,6 +22,8 @@ public class Customer : MonoBehaviour
 
     [SerializeField]
     GameObject money;
+    [SerializeField]
+    Transform moneySpawnPoint;
 
 
 
@@ -120,7 +122,7 @@ public class Customer : MonoBehaviour
 
     public void Finish()
     {
-        GameObject moneyScript = Instantiate(money, transform.position, Quaternion.identity);
+        GameObject moneyScript = Instantiate(money, moneySpawnPoint.position, Quaternion.identity);
         moneyScript.GetComponent<MoneyScript>().Amount = 25;
 
         _customerUiParent.SetActive(false);

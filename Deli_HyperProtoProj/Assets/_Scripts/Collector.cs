@@ -22,6 +22,11 @@ public class Collector : MonoBehaviour
     [SerializeField] TextMeshProUGUI _moneyGUI;
     [SerializeField] GameObject _moneyObj;
     IEnumerator _transferMoneyRoutine;
+
+
+
+    [Header("SFX")]
+    [SerializeField] AudioClip _collectClip;
     private void Start()
     {
         CurrentStackY = 0f;
@@ -43,7 +48,8 @@ public class Collector : MonoBehaviour
     }
     public void Collect()
     {
-
+        SoundManager.Instance.PlaySoundAndVibrate(_collectClip);
+     
         CarryNumber++;
         transform.position = _position;
     }
@@ -129,6 +135,7 @@ public class Collector : MonoBehaviour
                     customer.ValideOrder(item.FoodType);
                     CarryNumber--;
                     foodsCarrying.Remove(item);
+                    SoundManager.Instance.PlaySoundAndVibrate(_collectClip);
                     yield return new WaitForSeconds(0.2f);
                 }
             }
@@ -147,6 +154,7 @@ public class Collector : MonoBehaviour
             tileUnlocker.ReceiveMoney();
             Money -= 5;
             _moneyGUI.text = Money.ToString();
+            SoundManager.Instance.PlaySoundAndVibrate(_collectClip);
             yield return new WaitForSeconds(0.2f);
 
         }

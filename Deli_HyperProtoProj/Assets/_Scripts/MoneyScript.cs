@@ -6,4 +6,6 @@ public class MoneyScript : MonoBehaviour
 {
 
     public int Amount;
+
+   
 }
