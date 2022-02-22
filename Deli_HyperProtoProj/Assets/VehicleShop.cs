@@ -7,12 +7,15 @@ public class VehicleShop : MonoBehaviour
 
     public VehicleType vehicle;
 
+    bool bought;
+
 
     private void OnTriggerEnter(Collider other)
     {
        if(other.TryGetComponent(out Player player))
         {
             player.ChangeVehicleModel("Hi");
+            ChangeVehicle(player.gameObject);
         }
         
     }

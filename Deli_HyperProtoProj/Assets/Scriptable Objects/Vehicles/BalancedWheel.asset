@@ -13,5 +13,5 @@ MonoBehaviour:
   m_Name: BalancedWheel
   m_EditorClassIdentifier: 
   Name: BalancedWheel
-  Speed: 30
-  CarryLimit: 0
+  Speed: 15
+  CarryLimit: 7
