@@ -44,5 +44,5 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _customer: {fileID: 5925774484513789682, guid: 8602efbce54b9ff498d8cf54736e9cf1, type: 3}
-  interval: 2
+  interval: 7
   Spawned: 0
