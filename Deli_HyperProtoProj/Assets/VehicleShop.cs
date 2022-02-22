@@ -14,7 +14,7 @@ public class VehicleShop : MonoBehaviour
     {
        if(other.TryGetComponent(out Player player))
         {
-            player.ChangeVehicleModel("Hi");
+            player.ChangeVehicleModelAndAnimation(vehicle.Name);
             ChangeVehicle(player.gameObject);
         }
         
@@ -22,6 +22,7 @@ public class VehicleShop : MonoBehaviour
 
     public void ChangeVehicle(GameObject player)
     {
+      
         player.GetComponent<AnimationMovementController>().playerSpeed = vehicle.Speed;
         player.GetComponent<Collector>().carryLimit = vehicle.CarryLimit;
     }

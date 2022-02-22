@@ -12,7 +12,7 @@ public class TileManager : MonoBehaviour
         {
             data.Unlocker.TileToUnlock = data.Tile;
             data.Unlocker.Cost = data.CostToUnlock;
-            data.Unlocker.TileBank = data.TileBank;
+            data.Unlocker.TileBanks = data.TileBanks;
         }
     }
   
@@ -24,7 +24,7 @@ public class TileManager : MonoBehaviour
 public class TileData
 {
     public GameObject Tile;
-    public GameObject TileBank;
+    public GameObject[] TileBanks;
     public int CostToUnlock;
     public TileUnlocker Unlocker;
 

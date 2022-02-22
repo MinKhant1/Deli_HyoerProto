@@ -147,36 +147,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: cc6c557f20e5fa640a43dba41b998f25, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
---- !u!1 &741654257
-GameObject:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  serializedVersion: 6
-  m_Component:
-  - component: {fileID: 741654258}
-  m_Layer: 0
-  m_Name: Hi
-  m_TagString: PlayerVehicle
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 0
---- !u!4 &741654258
-Transform:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 741654257}
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_Children: []
-  m_Father: {fileID: 4612170343870279056}
-  m_RootOrder: 4
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1195412443
 GameObject:
   m_ObjectHideFlags: 0
@@ -189,11 +159,11 @@ GameObject:
   - component: {fileID: 1195412445}
   m_Layer: 0
   m_Name: BalancedWheel
-  m_TagString: Untagged
+  m_TagString: PlayerVehicle
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &1195412444
 Transform:
   m_ObjectHideFlags: 0
@@ -207,7 +177,7 @@ Transform:
   m_Children:
   - {fileID: 2040579538}
   m_Father: {fileID: 4612170343870279056}
-  m_RootOrder: 5
+  m_RootOrder: 4
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!95 &1195412445
 Animator:
@@ -521,7 +491,6 @@ Transform:
   - {fileID: 4612170342835910588}
   - {fileID: 4612170343105275147}
   - {fileID: 2007205293}
-  - {fileID: 741654258}
   - {fileID: 1195412444}
   m_Father: {fileID: 0}
   m_RootOrder: 0
@@ -557,7 +526,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   PlayerAnimator: {fileID: 1195412445}
-  rotationFactorPerFrame: 200
+  rotationFactorPerFrame: 10
   playerSpeed: 10
 --- !u!114 &4612170343870279060
 MonoBehaviour:
@@ -1040,7 +1009,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 919132149155446097, guid: 4690fccb2d8db284ba0ecd44faa03cfb, type: 3}
       propertyPath: m_IsActive
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 919132149155446097, guid: 4690fccb2d8db284ba0ecd44faa03cfb, type: 3}
       propertyPath: m_TagString

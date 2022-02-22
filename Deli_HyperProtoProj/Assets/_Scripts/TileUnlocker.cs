@@ -13,7 +13,7 @@ public class TileUnlocker : MonoBehaviour
     [HideInInspector]
     public GameObject TileToUnlock;
     [HideInInspector]
-    public GameObject TileBank;
+    public GameObject[] TileBanks;
 
     [HideInInspector]
     public GameObject UIObject;
@@ -52,7 +52,10 @@ public class TileUnlocker : MonoBehaviour
     public void UnlockTile()
     {
         TileToUnlock.SetActive(true);
-        TileBank.SetActive(false);
+        foreach (GameObject bank in TileBanks)
+        {
+            bank.SetActive(false);
+        }
         GetComponent<Collider>().enabled = false;
         UIObject.SetActive(false);
     }

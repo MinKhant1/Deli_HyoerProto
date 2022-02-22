@@ -18,13 +18,14 @@ public class Player : MonoBehaviour
         }
     }
 
-    public void ChangeVehicleModel(string vehicleName)
+    public void ChangeVehicleModelAndAnimation(string vehicleName)
     {
         foreach(GameObject vehicle in PlayerVehicles)
         {
             if(vehicle.name==vehicleName)
             {
                 vehicle.SetActive(true);
+                GetComponent<AnimationMovementController>().PlayerAnimator = vehicle.GetComponent<Animator>();
             }
             else
             {

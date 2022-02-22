@@ -8,6 +8,7 @@ TagManager:
   - TileUnlocker
   - CustomerExit
   - PlayerVehicle
+  - Building
   layers:
   - Default
   - TransparentFX
