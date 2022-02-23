@@ -9,6 +9,7 @@ TagManager:
   - CustomerExit
   - PlayerVehicle
   - Building
+  - VehicleShop
   layers:
   - Default
   - TransparentFX
