@@ -8,5 +8,6 @@ public class VehicleType : ScriptableObject
     public string Name;
     public float Speed;
     public int CarryLimit;
+    public int Cost;    
    
 }
