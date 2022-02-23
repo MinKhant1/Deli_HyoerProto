@@ -21,7 +21,8 @@ public class Collector : MonoBehaviour
     public int Money;
     [SerializeField] TextMeshProUGUI _moneyGUI;
     [SerializeField] GameObject _moneyObj;
-    IEnumerator _transferMoneyRoutine;
+    IEnumerator _transferMoneyToTileUnlockRoutine;
+    IEnumerator _transferMoneyToVehicleShopRoutine;
 
 
 
@@ -31,6 +32,8 @@ public class Collector : MonoBehaviour
     {
         CurrentStackY = 0f;
         _position = transform.position;
+
+        _moneyGUI.text = Money.ToString();
        
     }
 
@@ -81,17 +84,24 @@ public class Collector : MonoBehaviour
 
         if (other.gameObject.TryGetComponent(out MoneyScript money))
         {
-            AddMoney(money.Amount);
+            AddOrRemoveMoney(money.Amount);
             Destroy(other.gameObject);
         }
-
-
         if (other.gameObject.TryGetComponent(out TileUnlocker tileUnlocker))
         {
-            _transferMoneyRoutine = TransferMoney(tileUnlocker);
-           StartCoroutine(_transferMoneyRoutine);
+            _transferMoneyToTileUnlockRoutine = TransferMoneyToTileUnlocker(tileUnlocker);
+           StartCoroutine(_transferMoneyToTileUnlockRoutine);
 
         }
+
+        if (other.gameObject.TryGetComponent(out VehicleShop vehicleShop))
+        {
+            _transferMoneyToVehicleShopRoutine = TransferMoneyToVehicleShop(vehicleShop);
+            StartCoroutine(_transferMoneyToVehicleShopRoutine);
+        }
+
+
+
 
 
 
@@ -104,13 +114,27 @@ public class Collector : MonoBehaviour
         {
             foodsCarrying.Reverse();
             if (_transferFoodRoutine != null)
+            {
                 StopCoroutine(_transferFoodRoutine);
+                _transferFoodRoutine = null;
+
+            }
+           
         }
         if(other.CompareTag(Tags.TileUnlocker))
         {
-            if(_transferMoneyRoutine!=null)
+            if(_transferMoneyToTileUnlockRoutine!=null)
             {
-                StopCoroutine(_transferMoneyRoutine);
+                StopCoroutine(_transferMoneyToTileUnlockRoutine);
+                _transferMoneyToTileUnlockRoutine = null;
+            }
+        }
+        if(other.CompareTag(Tags.VehicleShop))
+        {
+            if(_transferMoneyToVehicleShopRoutine!=null)
+            {
+                StopCoroutine(_transferMoneyToVehicleShopRoutine);
+                _transferMoneyToVehicleShopRoutine = null;
             }
         }
 
@@ -145,20 +169,34 @@ public class Collector : MonoBehaviour
 
     }
 
-    public IEnumerator TransferMoney(TileUnlocker tileUnlocker)
+    public IEnumerator TransferMoneyToTileUnlocker(TileUnlocker tileUnlocker)
     {
         while (Money > 0 && !tileUnlocker.TileUnlocked)
         {
             GameObject money = Instantiate(_moneyObj, transform.position, Quaternion.identity);
             money.transform.DOMove(tileUnlocker.Target.position, .2f).OnComplete(()=>Destroy(money.gameObject));
             tileUnlocker.ReceiveMoney();
-            Money -= 5;
-            _moneyGUI.text = Money.ToString();
+            AddOrRemoveMoney(-5);
             SoundManager.Instance.PlaySoundAndVibrate(_collectClip);
             yield return new WaitForSeconds(0.2f);
 
         }
     }
+
+    public IEnumerator TransferMoneyToVehicleShop(VehicleShop shop)
+    {
+        while(Money>0 && !shop.bought)
+        {
+
+            GameObject money = Instantiate(_moneyObj, transform.position, Quaternion.identity);
+            money.transform.DOMove(shop.Target.position, .2f).OnComplete(() => Destroy(money.gameObject));
+            shop.ReceiveMoney();
+            AddOrRemoveMoney(-5);
+            yield return new WaitForSeconds(0.05f);
+        }
+
+    }
+
 
     public void AddFood(Food food)
     {
@@ -166,7 +204,7 @@ public class Collector : MonoBehaviour
 
     }
 
-    public void AddMoney(int amount)
+    public void AddOrRemoveMoney(int amount)
     {
         Money += amount;
         _moneyGUI.text = Money.ToString();

@@ -528,7 +528,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   PlayerAnimator: {fileID: 1195412445}
   rotationFactorPerFrame: 10
-  playerSpeed: 14
+  playerSpeed: 10
 --- !u!114 &4612170343870279060
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -547,7 +547,7 @@ MonoBehaviour:
   CarryNumber: 0
   carryLimit: 5
   MaxUi: {fileID: 192793065}
-  Money: 0
+  Money: 10000
   _moneyGUI: {fileID: 0}
   _moneyObj: {fileID: 5327748923583550010, guid: 67f4a1270295e9343a9dcb102e6a93e7, type: 3}
   _collectClip: {fileID: 8300000, guid: 3da8540e861f3274e8743b5ea079e4ef, type: 3}

@@ -15,3 +15,4 @@ MonoBehaviour:
   Name: BalancedWheel
   Speed: 15
   CarryLimit: 7
+  Cost: 800
