@@ -24,7 +24,7 @@ Material:
   m_Shader: {fileID: -6465566751694194690, guid: 940d79357fd7a4f01a49e7247aeaa4da, type: 3}
   m_ShaderKeywords: _EMISSION _METALLICSPECGLOSSMAP _SPECULAR_SETUP
   m_LightmapFlags: 2
-  m_EnableInstancingVariants: 0
+  m_EnableInstancingVariants: 1
   m_DoubleSidedGI: 0
   m_CustomRenderQueue: -1
   stringTagMap: {}
@@ -94,7 +94,11 @@ Material:
         m_Offset: {x: 0, y: 0}
     m_Floats:
     - Vector1_0d2d591f150b4f1980bb8c1c6cbe4c94: 0
+    - Vector1_49eb6ec2f7e74838b9bfc1284d53fe23: 0
     - Vector1_7f67cd66de354d8989089f2073e3d5f7: 1
+    - Vector1_88d90876a967410ebb668854b0e61b45: 0
+    - Vector1_b3d2823249e94ac7b6e2339806c6a5ec: 1
+    - Vector1_fd63312ec9b2488dbc2e9910b284ed49: 0
     - _AlphaClip: 0
     - _Blend: 0
     - _BumpScale: 1
@@ -124,6 +128,8 @@ Material:
     - _WorkflowMode: 0
     - _ZWrite: 1
     m_Colors:
+    - Color_4553dd1d50ac48279c9ef66b25368a03: {r: 0, g: 0, b: 0, a: 0}
+    - Color_4d43b04cdebb45d69f20c2a1d43b2db4: {r: 0, g: 0, b: 0, a: 0}
     - Vector2_6A93A1CF: {r: 1, g: 1, b: 0, a: 0}
     - _BaseColor: {r: 1, g: 1, b: 1, a: 1}
     - _Color: {r: 1, g: 1, b: 1, a: 1}
