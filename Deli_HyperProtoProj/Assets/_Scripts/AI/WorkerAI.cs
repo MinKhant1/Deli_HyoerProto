@@ -69,6 +69,7 @@ public class WorkerAI : MonoBehaviour
     [Task]
     public void FindFood()
     {
+        AgentStop();
         GameObject closestFood;
         _foods = GameObject.FindGameObjectsWithTag(_FoodType.FoodName);
         foreach (GameObject food in _foods)
@@ -103,7 +104,7 @@ public class WorkerAI : MonoBehaviour
         }
         else
         {
-            _agent.SetDestination(FoodTarget.transform.position);
+            AgentMove(FoodTarget.transform.position);
 
         }
 
@@ -127,19 +128,31 @@ public class WorkerAI : MonoBehaviour
 
     }
 
+    //[Task]
+    //public bool CustomerFound()
+    //{
+    //    return currentCustomer != null;
+    //}
+    //[Task]
     [Task]
-    public bool CustomerFound()
+    public void IsCustomerFound()
     {
-        return currentCustomer != null;
+        ThisTask.Complete(currentCustomer);
     }
 
     [Task]
     public void FindCustomer()
     {
         currentCustomer = FindObjectOfType<Customer>();
+
+     
         if (currentCustomer != null)
         {
             ThisTask.Succeed();
+        }
+        else
+        {
+            ThisTask.Fail();
         }
     }
 
@@ -149,13 +162,13 @@ public class WorkerAI : MonoBehaviour
 
         if (currentCustomer == null || currentCustomer.OrderComplete)
         {
+            AgentStop();
             ThisTask.Fail();
 
         }
         else
         {
-
-            _agent.SetDestination(currentCustomer.transform.position);
+            AgentMove(currentCustomer.transform.position);
         }
 
 
@@ -169,17 +182,40 @@ public class WorkerAI : MonoBehaviour
 
     }
 
+    private void AgentMove(Vector3 position)
+    {
+        _agent.isStopped = false;
+        _agent.SetDestination(position);
+        _anim.SetBool("IsRunning", true);
+    }
+
+    void AgentStop()
+    {
+        _agent.isStopped = true;
+        _anim.SetBool("IsRunning", false);
+    }
+
     [Task]
     public void TransferFood()
     {
+
+
+        if (currentCustomer == null || currentCustomer.OrderComplete)
+        {
+            _agent.isStopped = true;
+            ThisTask.Fail();
+
+        }
+
+        if(_collector.CarryNumber<=0)
+        {
+            ThisTask.Succeed();
+        }
+     
         transferFoodToCustomerRoutine = _collector.TransferFoodToCustomer(currentCustomer);
         StartCoroutine(transferFoodToCustomerRoutine);
 
-        //if (Customer.)
-        //{
-        //    ThisTask.Succeed();
-        //}
-
+        
     }
 
     [Task]
@@ -190,9 +226,7 @@ public class WorkerAI : MonoBehaviour
 
     }
 
-    [Task]
-
-
+   
 
     public bool pathComplete()
     {
