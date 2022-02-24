@@ -1,0 +1,20 @@
+tree("Root")
+	repeat
+		sequence
+			tree("GoToFood")
+			tree("GoToCompany")
+
+
+
+
+tree("GoToFood")
+	sequence
+		while IsFoodEmpty
+			  FindFood
+
+		GoToFood
+
+tree("GoToCompany")
+	GoToCompany
+		
+	
