@@ -13,18 +13,29 @@ public class WorkerAI : MonoBehaviour
 
 
     [SerializeField] FoodType _FoodType;
-    [SerializeField] GameObject Company;
+
     public GameObject FoodTarget;
 
 
 
+    public Customer currentCustomer;
+
+
+
+    Animator _anim;
     NavMeshAgent _agent;
+
+    public WorkerCollector _collector;
+
+    IEnumerator transferFoodToCustomerRoutine;
 
     private void Start()
     {
         _agent = GetComponent<NavMeshAgent>();
-
+        _anim = GetComponent<Animator>();
+        _collector = GetComponent<WorkerCollector>();
         _foods = GameObject.FindGameObjectsWithTag(_FoodType.FoodName);
+
 
 
 
@@ -37,16 +48,23 @@ public class WorkerAI : MonoBehaviour
             if (food.GetComponent<Food>().Collected)
             {
                 _uncollectedFoods.Remove(food);
+                FoodTarget = null;
             }
 
         }
+
+        if (_agent.velocity != Vector3.zero)
+        {
+            _anim.SetBool("IsRunning", true);
+
+        }
+        else
+        {
+            _anim.SetBool("IsRunning", false);
+        }
+
     }
 
-    [Task]
-    public bool IsFoodEmpty()
-    {
-        return FoodTarget == null;
-    }
 
     [Task]
     public void FindFood()
@@ -55,13 +73,19 @@ public class WorkerAI : MonoBehaviour
         _foods = GameObject.FindGameObjectsWithTag(_FoodType.FoodName);
         foreach (GameObject food in _foods)
         {
-            if (!food.GetComponent<Food>().Collected)
+            if (!_uncollectedFoods.Contains(food))
             {
-                _uncollectedFoods.Add(food);
+
+
+                if (!food.GetComponent<Food>().Collected && food != null)
+                {
+
+                    _uncollectedFoods.Add(food);
+                }
             }
 
         }
-        closestFood = GetClosestFood(_foods);
+        closestFood = GetClosestFood(_uncollectedFoods);
         FoodTarget = closestFood;
 
         ThisTask.Succeed();
@@ -72,35 +96,86 @@ public class WorkerAI : MonoBehaviour
     [Task]
     public void GoToFood()
     {
-        _agent.SetDestination(FoodTarget.transform.position);
-
-
-        if (pathComplete())
-        {
-            ThisTask.Succeed();
-
-        }
         if (FoodTarget == null)
         {
             ThisTask.Fail();
 
         }
+        else
+        {
+            _agent.SetDestination(FoodTarget.transform.position);
+
+        }
+
+        if (pathComplete())
+        {
+            if (FoodTarget != null)
+            {
+                Food food = FoodTarget.GetComponent<Food>();
+                _collector.CollectFood(food);
+
+            }
+            if (IsFoodFull())
+            {
+                ThisTask.Succeed();
+
+            }
+
+        }
+
 
 
     }
 
     [Task]
-    public void GoToCompany()
+    public void FindCustomer()
     {
-        _agent.SetDestination(Company.transform.position);
+        currentCustomer = FindObjectOfType<Customer>();
+        if(currentCustomer!=null)
+        {
+            ThisTask.Succeed();
+        }
+    }
+
+    [Task]
+    public void GoToCustomer()
+    {
+       
+        _agent.SetDestination(currentCustomer.transform.position);
 
 
         if (pathComplete())
         {
+
             ThisTask.Succeed();
+
         }
 
     }
+
+    [Task]
+    public void TransferFood()
+    {
+        transferFoodToCustomerRoutine = _collector.TransferFoodToCustomer(currentCustomer);
+        StartCoroutine(transferFoodToCustomerRoutine);
+
+        //if (Customer.)
+        //{
+        //    ThisTask.Succeed();
+        //}
+
+    }
+
+    [Task]
+    public bool IsFoodFull()
+    {
+        return _collector.CarryNumber >= _collector.CarryLimit;
+        //ThisTask.Complete(_collector.CarryNumber >= _collector.CarryLimit);
+
+    }
+
+    [Task]
+
 
 
     public bool pathComplete()
@@ -117,7 +192,7 @@ public class WorkerAI : MonoBehaviour
         return false;
     }
 
-    GameObject GetClosestFood(GameObject[] foods)
+    GameObject GetClosestFood(List<GameObject> foods)
     {
         GameObject tMin = null;
         float minDist = Mathf.Infinity;

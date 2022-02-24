@@ -1,20 +1,21 @@
 tree("Root")
-	repeat
-		sequence
+	sequence
+		while not IsFoodFull
 			tree("GoToFood")
-			tree("GoToCompany")
+		tree("GoToCustomer")
 
 
 
 
 tree("GoToFood")
 	sequence
-		while IsFoodEmpty
-			  FindFood
-
+		FindFood
 		GoToFood
 
-tree("GoToCompany")
-	GoToCompany
+tree("GoToCustomer")
+	sequence
+		FindCustomer
+		GoToCustomer
+		TransferFood
 		
 	

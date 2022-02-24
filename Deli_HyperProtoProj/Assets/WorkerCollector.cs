@@ -4,15 +4,55 @@ using UnityEngine;
 
 public class WorkerCollector : MonoBehaviour
 {
-    // Start is called before the first frame update
-    void Start()
+
+    public int CarryLimit;
+    public int CarryNumber;
+    public float _currentStackY;
+
+    public List<Food> foodsCarrying = new List<Food>();
+
+    [SerializeField] GameObject collectorParent;
+
+
+
+
+
+    public void CollectFood(Food food)
     {
-        
+        if (!food.Collected)
+        {
+
+            food.GoTostack(collectorParent.transform, _currentStackY);
+            _currentStackY += food.foodSizeY;
+            CarryNumber++;
+            foodsCarrying.Add(food);
+            food.Collected = true;
+        }
     }
 
-    // Update is called once per frame
-    void Update()
+
+    public IEnumerator TransferFoodToCustomer(Customer customer)
     {
-        
+
+        foodsCarrying.Reverse();
+        foreach (Food item in foodsCarrying.ToArray())
+        {
+            foreach (Order order in customer.orders)
+            {
+
+                if (item.FoodType == order.OrderedFood && order.NumberOfFood > 0)
+                {
+                   
+                    _currentStackY -= item.foodSizeY;
+                    customer.ValideOrder(item.FoodType);
+                    CarryNumber--;
+                    foodsCarrying.Remove(item);
+                    item.GoToCustomer(customer.gameObject.transform);
+                    //SoundManager.Instance.PlaySoundAndVibrate(_collectClip);
+                    yield return new WaitForSeconds(0.2f);
+                }
+            }
+
+        }
     }
 }
