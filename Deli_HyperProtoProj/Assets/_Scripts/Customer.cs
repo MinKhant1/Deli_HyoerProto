@@ -16,7 +16,7 @@ public class Customer : MonoBehaviour
     GameObject _customerUiParent;
     [SerializeField]
     GameObject _deliveryPlaceUi;
-    bool _orderComplete;
+   public bool OrderComplete;
 
 
 
@@ -51,8 +51,8 @@ public class Customer : MonoBehaviour
     private void Update()
     {
 
-        _orderComplete = OrderDone();
-        if (_orderComplete && !finish)
+        OrderComplete = OrderDone();
+        if (OrderComplete && !finish)
         {
 
             Finish();
@@ -62,7 +62,7 @@ public class Customer : MonoBehaviour
 
         }
 
-        if (_orderComplete && pathComplete())
+        if (OrderComplete && pathComplete())
         {
 
             if (customerSpawner != null)

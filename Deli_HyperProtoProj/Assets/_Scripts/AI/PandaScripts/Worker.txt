@@ -1,8 +1,9 @@
 tree("Root")
-	sequence
+	fallback
 		while not IsFoodFull
 			tree("GoToFood")
-		tree("GoToCustomer")
+		while IsFoodFull
+			tree("GoToCustomer")
 
 
 
@@ -14,7 +15,8 @@ tree("GoToFood")
 
 tree("GoToCustomer")
 	sequence
-		FindCustomer
+			while not CustomerFound
+				FindCustomer
 		GoToCustomer
 		TransferFood
 		

@@ -236,7 +236,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f3ecb24bc1be83a4c9a712fb39ee0595, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  CarryLimit: 2
+  CarryLimit: 1
   CarryNumber: 0
   _currentStackY: 0
   foodsCarrying: []

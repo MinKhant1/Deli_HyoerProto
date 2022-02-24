@@ -128,10 +128,16 @@ public class WorkerAI : MonoBehaviour
     }
 
     [Task]
+    public bool CustomerFound()
+    {
+        return currentCustomer != null;
+    }
+
+    [Task]
     public void FindCustomer()
     {
         currentCustomer = FindObjectOfType<Customer>();
-        if(currentCustomer!=null)
+        if (currentCustomer != null)
         {
             ThisTask.Succeed();
         }
@@ -140,8 +146,18 @@ public class WorkerAI : MonoBehaviour
     [Task]
     public void GoToCustomer()
     {
-       
-        _agent.SetDestination(currentCustomer.transform.position);
+
+        if (currentCustomer == null || currentCustomer.OrderComplete)
+        {
+            ThisTask.Fail();
+
+        }
+        else
+        {
+
+            _agent.SetDestination(currentCustomer.transform.position);
+        }
+
 
 
         if (pathComplete())
