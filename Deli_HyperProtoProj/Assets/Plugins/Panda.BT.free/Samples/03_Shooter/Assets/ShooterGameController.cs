@@ -37,7 +37,7 @@ namespace Panda.Examples.Shooter
 
         [Task]
         bool IsPlayerDead()
-        {
+        {   
             return player == null;
         }
 

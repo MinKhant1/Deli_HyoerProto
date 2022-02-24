@@ -69,7 +69,8 @@ public class Collector : MonoBehaviour
 
                     Collect();
                     AddFood(food);
-                    food.GoTostack();
+                    food.GoTostack(StackParent.transform,CurrentStackY);
+                    CurrentStackY += food.foodSizeY;
                     food.Collected = true;
 
                 }

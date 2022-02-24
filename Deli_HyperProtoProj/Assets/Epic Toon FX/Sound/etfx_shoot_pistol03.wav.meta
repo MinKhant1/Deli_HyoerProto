@@ -1,21 +1,35 @@
 fileFormatVersion: 2
-guid: 38d95e38f52f6a54b888d9fd555fa1e3
-timeCreated: 1499369024
-licenseType: Store
+guid: 400e323cfa8364746afab3465be0f69f
 AudioImporter:
+  externalObjects: {}
   serializedVersion: 6
   defaultSettings:
     loadType: 0
     sampleRateSetting: 0
     sampleRateOverride: 44100
-    compressionFormat: 1
+    compressionFormat: 0
     quality: 1
     conversionMode: 0
-  platformSettingOverrides: {}
+  platformSettingOverrides:
+    4:
+      loadType: 0
+      sampleRateSetting: 0
+      sampleRateOverride: 44100
+      compressionFormat: 3
+      quality: 1
+      conversionMode: 0
+    7:
+      loadType: 0
+      sampleRateSetting: 0
+      sampleRateOverride: 44100
+      compressionFormat: 1
+      quality: 1
+      conversionMode: 0
   forceToMono: 0
   normalize: 1
   preloadAudioData: 1
   loadInBackground: 0
+  ambisonic: 0
   3D: 1
   userData: 
   assetBundleName: 

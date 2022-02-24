@@ -13,18 +13,29 @@ public class WorkerAI : MonoBehaviour
 
 
     [SerializeField] FoodType _FoodType;
-    [SerializeField] GameObject Company;
+
     public GameObject FoodTarget;
 
 
 
+    public Customer currentCustomer;
+
+
+
+    Animator _anim;
     NavMeshAgent _agent;
+
+    public WorkerCollector _collector;
+
+    IEnumerator transferFoodToCustomerRoutine;
 
     private void Start()
     {
         _agent = GetComponent<NavMeshAgent>();
-
+        _anim = GetComponent<Animator>();
+        _collector = GetComponent<WorkerCollector>();
         _foods = GameObject.FindGameObjectsWithTag(_FoodType.FoodName);
+
 
 
 
@@ -37,31 +48,45 @@ public class WorkerAI : MonoBehaviour
             if (food.GetComponent<Food>().Collected)
             {
                 _uncollectedFoods.Remove(food);
+                FoodTarget = null;
             }
 
         }
+
+        if (_agent.velocity != Vector3.zero)
+        {
+            _anim.SetBool("IsRunning", true);
+
+        }
+        else
+        {
+            _anim.SetBool("IsRunning", false);
+        }
+
     }
 
-    [Task]
-    public bool IsFoodEmpty()
-    {
-        return FoodTarget == null;
-    }
 
     [Task]
     public void FindFood()
     {
+        AgentStop();
         GameObject closestFood;
         _foods = GameObject.FindGameObjectsWithTag(_FoodType.FoodName);
         foreach (GameObject food in _foods)
         {
-            if (!food.GetComponent<Food>().Collected)
+            if (!_uncollectedFoods.Contains(food))
             {
-                _uncollectedFoods.Add(food);
+
+
+                if (!food.GetComponent<Food>().Collected && food != null)
+                {
+
+                    _uncollectedFoods.Add(food);
+                }
             }
 
         }
-        closestFood = GetClosestFood(_foods);
+        closestFood = GetClosestFood(_uncollectedFoods);
         FoodTarget = closestFood;
 
         ThisTask.Succeed();
@@ -72,36 +97,136 @@ public class WorkerAI : MonoBehaviour
     [Task]
     public void GoToFood()
     {
-        _agent.SetDestination(FoodTarget.transform.position);
-
-
-        if (pathComplete())
-        {
-            ThisTask.Succeed();
-
-        }
         if (FoodTarget == null)
         {
             ThisTask.Fail();
 
         }
+        else
+        {
+            AgentMove(FoodTarget.transform.position);
+
+        }
+
+        if (pathComplete())
+        {
+            if (FoodTarget != null)
+            {
+                Food food = FoodTarget.GetComponent<Food>();
+                _collector.CollectFood(food);
+
+            }
+            if (IsFoodFull())
+            {
+                ThisTask.Succeed();
+
+            }
+
+        }
+
 
 
     }
 
+    //[Task]
+    //public bool CustomerFound()
+    //{
+    //    return currentCustomer != null;
+    //}
+    //[Task]
     [Task]
-    public void GoToCompany()
+    public void IsCustomerFound()
     {
-        _agent.SetDestination(Company.transform.position);
+        ThisTask.Complete(currentCustomer);
+    }
+
+    [Task]
+    public void FindCustomer()
+    {
+        currentCustomer = FindObjectOfType<Customer>();
+
+     
+        if (currentCustomer != null)
+        {
+            ThisTask.Succeed();
+        }
+        else
+        {
+            ThisTask.Fail();
+        }
+    }
+
+    [Task]
+    public void GoToCustomer()
+    {
+
+        if (currentCustomer == null || currentCustomer.OrderComplete)
+        {
+            AgentStop();
+            ThisTask.Fail();
+
+        }
+        else
+        {
+            AgentMove(currentCustomer.transform.position);
+        }
+
 
 
         if (pathComplete())
         {
+
             ThisTask.Succeed();
+
         }
 
     }
 
+    private void AgentMove(Vector3 position)
+    {
+        _agent.isStopped = false;
+        _agent.SetDestination(position);
+        _anim.SetBool("IsRunning", true);
+    }
+
+    void AgentStop()
+    {
+        _agent.isStopped = true;
+        _anim.SetBool("IsRunning", false);
+    }
+
+    [Task]
+    public void TransferFood()
+    {
+
+
+        if (currentCustomer == null || currentCustomer.OrderComplete)
+        {
+            _agent.isStopped = true;
+            ThisTask.Fail();
+
+        }
+
+        if(_collector.CarryNumber<=0)
+        {
+            ThisTask.Succeed();
+        }
+     
+        transferFoodToCustomerRoutine = _collector.TransferFoodToCustomer(currentCustomer);
+        StartCoroutine(transferFoodToCustomerRoutine);
+
+        
+    }
+
+    [Task]
+    public bool IsFoodFull()
+    {
+        return _collector.CarryNumber >= _collector.CarryLimit;
+        //ThisTask.Complete(_collector.CarryNumber >= _collector.CarryLimit);
+
+    }
+
+   
 
     public bool pathComplete()
     {
@@ -117,7 +242,7 @@ public class WorkerAI : MonoBehaviour
         return false;
     }
 
-    GameObject GetClosestFood(GameObject[] foods)
+    GameObject GetClosestFood(List<GameObject> foods)
     {
         GameObject tMin = null;
         float minDist = Mathf.Infinity;
