@@ -5,8 +5,8 @@ using UnityEngine.InputSystem;
 public class AnimationMovementController : MonoBehaviour
 {
 
-    PI playerInput;
-    CharacterController characterController;
+   PI playerInput;
+   CharacterController characterController;
    public Animator PlayerAnimator;
 
 
