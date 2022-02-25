@@ -37,7 +37,7 @@ public class WorkerCollector : MonoBehaviour
         foodsCarrying.Reverse();
         foreach (Food item in foodsCarrying.ToArray())
         {
-            foreach (Order order in customer.orders)
+            foreach (Order order in customer.orders.ToArray())
             {
 
                 if (item.FoodType == order.OrderedFood && order.NumberOfFood > 0)
