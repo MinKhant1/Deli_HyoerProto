@@ -16,8 +16,9 @@ tree("GoToFood")
 tree("GoToCustomer")
 	sequence
 		FindCustomer
-		IsCustomerFound
-		GoToCustomer
-		TransferFood
+		while IsCustomerFound
+			sequence
+				GoToCustomer
+				TransferFood
 		
 	

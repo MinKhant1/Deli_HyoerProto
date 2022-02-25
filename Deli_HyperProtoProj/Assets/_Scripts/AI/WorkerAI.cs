@@ -128,24 +128,26 @@ public class WorkerAI : MonoBehaviour
 
     }
 
+    [Task]
+    public bool IsCustomerFound()
+    {
+        return currentCustomer != null;
+    }
+
     //[Task]
     //public bool CustomerFound()
     //{
     //    return currentCustomer != null;
     //}
-    //[Task]
-    [Task]
-    public void IsCustomerFound()
-    {
-        ThisTask.Complete(currentCustomer);
-    }
+
+  
 
     [Task]
     public void FindCustomer()
     {
         currentCustomer = FindObjectOfType<Customer>();
 
-     
+
         if (currentCustomer != null)
         {
             ThisTask.Succeed();
