@@ -150,18 +150,23 @@ public class Collector : MonoBehaviour
         foodsCarrying.Reverse();
         foreach (Food item in foodsCarrying.ToArray())
         {
-            foreach (Order order in customer.orders)
-            {
 
-                if (item.FoodType == order.OrderedFood && order.NumberOfFood > 0)
+            if (customer.orders.Count > 0)
+            {
+                foreach (Order order in customer.orders.ToArray())
                 {
-                    item.GoToCustomer(customer.gameObject.transform);
-                    CurrentStackY -= item.foodSizeY;
-                    customer.ValideOrder(item.FoodType);
-                    CarryNumber--;
-                    foodsCarrying.Remove(item);
-                    SoundManager.Instance.PlaySoundAndVibrate(_collectClip);
-                    yield return new WaitForSeconds(0.2f);
+                    
+
+                    if (item.FoodType == order.OrderedFood && order.NumberOfFood > 0)
+                    {
+                        item.GoToCustomer(customer.gameObject.transform);
+                        CurrentStackY -= item.foodSizeY;
+                        customer.ValideOrder(item.FoodType);
+                        CarryNumber--;
+                        foodsCarrying.Remove(item);
+                        SoundManager.Instance.PlaySoundAndVibrate(_collectClip);
+                        yield return new WaitForSeconds(0.2f);
+                    }
                 }
             }
 
