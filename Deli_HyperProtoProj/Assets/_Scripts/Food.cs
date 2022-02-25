@@ -33,17 +33,13 @@ public class Food : MonoBehaviour
 
         foodSpawner.Spawned = false;
 
-
-        //_stackY = collector.CurrentStackY;
-
-        //transform.SetParent();
         transform.parent = collectorParent;
         transform.localPosition = Vector3.zero;
         var sequence = DOTween.Sequence();
 
         sequence.Append(transform.DOLocalMove(new Vector3(0, yPosition + 2f, 0), 0.2f));
         sequence.Append(transform.DOLocalMove(new Vector3(0, yPosition, 0), 0.2f));
-        //collector.CurrentStackY +=foodSizeY;
+      
     }
 
     public void GoToCustomer(Transform customer)
