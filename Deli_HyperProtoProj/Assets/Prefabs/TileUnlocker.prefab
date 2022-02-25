@@ -62,7 +62,7 @@ MonoBehaviour:
   Cost: 10
   CostLeft: 0
   TileToUnlock: {fileID: 0}
-  TileBank: {fileID: 0}
+  TileBanks: []
   UIObject: {fileID: 0}
   Target: {fileID: 3634099196104902412}
   TileUnlocked: 0
@@ -413,7 +413,7 @@ RectTransform:
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
   m_AnchoredPosition: {x: 6.7, y: 0}
-  m_SizeDelta: {x: 250, y: 155}
+  m_SizeDelta: {x: 230, y: 150}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &3634099195706647253
 CanvasRenderer:
@@ -443,7 +443,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_Sprite: {fileID: 21300000, guid: f441cdf54580e6c4992a709cb492dbc2, type: 3}
+  m_Sprite: {fileID: 21300000, guid: 2cac21b7460a32b48b92477e7920d471, type: 3}
   m_Type: 0
   m_PreserveAspect: 0
   m_FillCenter: 1
