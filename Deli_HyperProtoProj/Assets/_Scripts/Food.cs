@@ -26,6 +26,8 @@ public class Food : MonoBehaviour
     private void Start()
     {
         collector = FindObjectOfType<Collector>();
+
+        LevelData.Instance.UncollectedFood.Add(this);
     }
     public void GoTostack(Transform collectorParent,float yPosition)
     {
@@ -39,7 +41,8 @@ public class Food : MonoBehaviour
 
         sequence.Append(transform.DOLocalMove(new Vector3(0, yPosition + 2f, 0), 0.2f));
         sequence.Append(transform.DOLocalMove(new Vector3(0, yPosition, 0), 0.2f));
-      
+        LevelData.Instance.UncollectedFood.Remove(this);
+
     }
 
     public void GoToCustomer(Transform customer)

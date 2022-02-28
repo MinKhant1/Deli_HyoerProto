@@ -43,6 +43,7 @@ public class Customer : MonoBehaviour
         _agent = GetComponent<NavMeshAgent>();
         _anim = GetComponent<Animator>();
         MakeOrder();
+        LevelData.Instance.customers.Add(this);
 
 
     }
@@ -122,6 +123,7 @@ public class Customer : MonoBehaviour
 
     public void Finish()
     {
+        LevelData.Instance.customers.Remove(this);
         GameObject moneyScript = Instantiate(money, moneySpawnPoint.position, Quaternion.identity);
         moneyScript.GetComponent<MoneyScript>().Amount = 25;
 

@@ -7,18 +7,18 @@ using Panda;
 public class WorkerAI : MonoBehaviour
 {
 
-    public GameObject[] _foods;
-    public List<GameObject> _uncollectedFoods = new List<GameObject>();
+    //public GameObject[] _foods;
+    //public List<GameObject> _uncollectedFoods = new List<GameObject>();
 
 
 
-    [SerializeField] FoodType _FoodType;
+    public FoodType FoodType;
 
-    public GameObject FoodTarget;
+    public Food FoodTarget;
 
 
 
-    public Customer currentCustomer;
+    Customer currentCustomer;
 
 
 
@@ -34,24 +34,21 @@ public class WorkerAI : MonoBehaviour
         _agent = GetComponent<NavMeshAgent>();
         _anim = GetComponent<Animator>();
         _collector = GetComponent<WorkerCollector>();
-        _foods = GameObject.FindGameObjectsWithTag(_FoodType.FoodName);
-
-
-
+        //_foods = GameObject.FindGameObjectsWithTag(FoodType.FoodName);
 
     }
 
     private void Update()
     {
-        foreach (GameObject food in _uncollectedFoods.ToArray())
-        {
-            if (food.GetComponent<Food>().Collected)
-            {
-                _uncollectedFoods.Remove(food);
-                FoodTarget = null;
-            }
+        //foreach (GameObject food in _uncollectedFoods.ToArray())
+        //{
+        //    if (food.GetComponent<Food>().Collected)
+        //    {
+        //        _uncollectedFoods.Remove(food);
+        //        FoodTarget = null;
+        //    }
 
-        }
+        //}
 
         if (_agent.velocity != Vector3.zero)
         {
@@ -70,24 +67,39 @@ public class WorkerAI : MonoBehaviour
     public void FindFood()
     {
         AgentStop();
-        GameObject closestFood;
-        _foods = GameObject.FindGameObjectsWithTag(_FoodType.FoodName);
-        foreach (GameObject food in _foods)
-        {
-            if (!_uncollectedFoods.Contains(food))
-            {
+
+        //_foods = GameObject.FindGameObjectsWithTag(FoodType.FoodName);
+        //foreach (GameObject food in _uncollectedFoods.ToArray())
+        //{
+        //    if (food.GetComponent<Food>().Collected)
+        //    {
+        //        _uncollectedFoods.Remove(food);
+        //        FoodTarget = null;
+        //    }
+
+        //}
+        //foreach (GameObject food in _foods)
+        //{
+        //    if (!_uncollectedFoods.Contains(food))
+        //    {
 
 
-                if (!food.GetComponent<Food>().Collected && food != null)
-                {
+        //        if (!food.GetComponent<Food>().Collected && food != null)
+        //        {
 
-                    _uncollectedFoods.Add(food);
-                }
-            }
+        //            _uncollectedFoods.Add(food);
+        //        }
+        //    }
 
-        }
-        closestFood = GetClosestFood(_uncollectedFoods);
-        FoodTarget = closestFood;
+        //}
+
+
+        FoodTarget = GetClosestFood(LevelData.Instance.UncollectedFood);
+
+
+
+
+
 
         ThisTask.Succeed();
 
@@ -97,6 +109,16 @@ public class WorkerAI : MonoBehaviour
     [Task]
     public void GoToFood()
     {
+        //foreach (GameObject food in _uncollectedFoods.ToArray())
+        //{
+        //    if (food.GetComponent<Food>().Collected)
+        //    {
+        //        _uncollectedFoods.Remove(food);
+        //        FoodTarget = null;
+        //    }
+
+        //}
+
         if (FoodTarget == null)
         {
             ThisTask.Fail();
@@ -113,7 +135,9 @@ public class WorkerAI : MonoBehaviour
             if (FoodTarget != null)
             {
                 Food food = FoodTarget.GetComponent<Food>();
+
                 _collector.CollectFood(food);
+                FoodTarget = null;
 
             }
             if (IsFoodFull())
@@ -134,19 +158,23 @@ public class WorkerAI : MonoBehaviour
         return currentCustomer != null;
     }
 
-    //[Task]
-    //public bool CustomerFound()
-    //{
-    //    return currentCustomer != null;
-    //}
-
-  
-
     [Task]
     public void FindCustomer()
     {
-        currentCustomer = FindObjectOfType<Customer>();
+        //currentCustomer = FindObjectOfType<Customer>();
 
+        foreach (Customer cust in LevelData.Instance.customers)
+        {
+
+            foreach (Order order in cust.orders)
+            {
+                if (order.OrderedFood == FoodType)
+                {
+                    currentCustomer = cust;
+                    break;
+                }
+            }
+        }
 
         if (currentCustomer != null)
         {
@@ -209,15 +237,15 @@ public class WorkerAI : MonoBehaviour
 
         }
 
-        if(_collector.CarryNumber<=0)
+        if (_collector.CarryNumber <= 0)
         {
             ThisTask.Succeed();
         }
-     
+
         transferFoodToCustomerRoutine = _collector.TransferFoodToCustomer(currentCustomer);
         StartCoroutine(transferFoodToCustomerRoutine);
 
-        
+
     }
 
     [Task]
@@ -228,7 +256,7 @@ public class WorkerAI : MonoBehaviour
 
     }
 
-   
+
 
     public bool pathComplete()
     {
@@ -244,13 +272,14 @@ public class WorkerAI : MonoBehaviour
         return false;
     }
 
-    GameObject GetClosestFood(List<GameObject> foods)
+    Food GetClosestFood(List<Food> foods)
     {
-        GameObject tMin = null;
+        Food tMin = null;
         float minDist = Mathf.Infinity;
         Vector3 currentPos = transform.position;
-        foreach (GameObject t in foods)
+        foreach (Food t in foods)
         {
+            if (t.FoodType != FoodType) continue;
             float dist = Vector3.Distance(t.transform.position, currentPos);
             if (dist < minDist)
             {
