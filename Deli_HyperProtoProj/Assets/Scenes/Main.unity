@@ -4881,7 +4881,11 @@ GameObject:
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
 <<<<<<< HEAD
+<<<<<<< HEAD
   m_IsActive: 0
+=======
+  m_IsActive: 1
+>>>>>>> parent of 7678d99c (us other half placed)
 =======
   m_IsActive: 1
 >>>>>>> parent of 7678d99c (us other half placed)
@@ -5271,7 +5275,10 @@ BoxCollider:
   m_Size: {x: 0.6470232, y: 1.1784372, z: 0.6470337}
   m_Center: {x: -0.00000047683716, y: 0.5892186, z: 0}
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> parent of 7678d99c (us other half placed)
 --- !u!1 &164625778
 GameObject:
   m_ObjectHideFlags: 0
@@ -11732,7 +11739,10 @@ Transform:
   - {fileID: 212697447}
   - {fileID: 400821370}
 <<<<<<< HEAD
+<<<<<<< HEAD
   - {fileID: 1570391768}
+=======
+>>>>>>> parent of 7678d99c (us other half placed)
 =======
 >>>>>>> parent of 7678d99c (us other half placed)
   m_Father: {fileID: 590483948}
@@ -12483,6 +12493,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
 --- !u!1001 &416925936
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -12550,6 +12561,8 @@ Transform:
   m_PrefabInstance: {fileID: 416925936}
   m_PrefabAsset: {fileID: 0}
 --- !u!1001 &418712177
+>>>>>>> parent of 7678d99c (us other half placed)
+=======
 >>>>>>> parent of 7678d99c (us other half placed)
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -13398,6 +13411,7 @@ Transform:
   m_PrefabInstance: {fileID: 430361475}
   m_PrefabAsset: {fileID: 0}
 <<<<<<< HEAD
+<<<<<<< HEAD
 --- !u!1 &440253089
 GameObject:
   m_ObjectHideFlags: 0
@@ -13429,6 +13443,8 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 14
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+=======
+>>>>>>> parent of 7678d99c (us other half placed)
 =======
 >>>>>>> parent of 7678d99c (us other half placed)
 --- !u!1 &446393438
@@ -14000,7 +14016,11 @@ GameObject:
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
 <<<<<<< HEAD
+<<<<<<< HEAD
   m_IsActive: 0
+=======
+  m_IsActive: 1
+>>>>>>> parent of 7678d99c (us other half placed)
 =======
   m_IsActive: 1
 >>>>>>> parent of 7678d99c (us other half placed)
@@ -14020,6 +14040,7 @@ Transform:
   m_Father: {fileID: 1629190352}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+<<<<<<< HEAD
 <<<<<<< HEAD
 --- !u!1001 &456743038
 PrefabInstance:
@@ -14083,6 +14104,8 @@ Transform:
   m_CorrespondingSourceObject: {fileID: 441798, guid: 06a9858b4309bcf4cbe7ef09ae436c1d, type: 3}
   m_PrefabInstance: {fileID: 456743038}
   m_PrefabAsset: {fileID: 0}
+=======
+>>>>>>> parent of 7678d99c (us other half placed)
 =======
 >>>>>>> parent of 7678d99c (us other half placed)
 --- !u!1001 &457187854
@@ -14768,7 +14791,11 @@ GameObject:
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
 <<<<<<< HEAD
+<<<<<<< HEAD
   m_IsActive: 0
+=======
+  m_IsActive: 1
+>>>>>>> parent of 7678d99c (us other half placed)
 =======
   m_IsActive: 1
 >>>>>>> parent of 7678d99c (us other half placed)
@@ -17912,6 +17939,7 @@ Transform:
   m_PrefabInstance: {fileID: 572219235}
   m_PrefabAsset: {fileID: 0}
 <<<<<<< HEAD
+<<<<<<< HEAD
 --- !u!1 &574384723
 GameObject:
   m_ObjectHideFlags: 0
@@ -17943,6 +17971,8 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 17
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+=======
+>>>>>>> parent of 7678d99c (us other half placed)
 =======
 >>>>>>> parent of 7678d99c (us other half placed)
 --- !u!1001 &574618572
@@ -24846,7 +24876,11 @@ GameObject:
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
 <<<<<<< HEAD
+<<<<<<< HEAD
   m_IsActive: 0
+=======
+  m_IsActive: 1
+>>>>>>> parent of 7678d99c (us other half placed)
 =======
   m_IsActive: 1
 >>>>>>> parent of 7678d99c (us other half placed)
@@ -28383,6 +28417,9 @@ MonoBehaviour:
     - {fileID: 1207655386}
     CostToUnlock: 25
     Unlocker: {fileID: 601832249}
+<<<<<<< HEAD
+>>>>>>> parent of 7678d99c (us other half placed)
+=======
 >>>>>>> parent of 7678d99c (us other half placed)
 --- !u!1001 &857010422
 PrefabInstance:
@@ -30849,6 +30886,9 @@ Transform:
 =======
   m_Father: {fileID: 1248122236}
   m_RootOrder: 1
+<<<<<<< HEAD
+>>>>>>> parent of 7678d99c (us other half placed)
+=======
 >>>>>>> parent of 7678d99c (us other half placed)
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1001 &921568376
@@ -31892,7 +31932,10 @@ Transform:
   - {fileID: 1424432993}
   - {fileID: 876972238}
 <<<<<<< HEAD
+<<<<<<< HEAD
   - {fileID: 204263776}
+=======
+>>>>>>> parent of 7678d99c (us other half placed)
 =======
 >>>>>>> parent of 7678d99c (us other half placed)
   m_Father: {fileID: 590483948}
@@ -41738,7 +41781,10 @@ Transform:
   m_Children:
   - {fileID: 2023087393}
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> parent of 7678d99c (us other half placed)
   - {fileID: 919362144}
 >>>>>>> parent of 7678d99c (us other half placed)
   - {fileID: 1998895457}
@@ -41750,6 +41796,9 @@ Transform:
   - {fileID: 1573299610}
 =======
   - {fileID: 691982065}
+<<<<<<< HEAD
+>>>>>>> parent of 7678d99c (us other half placed)
+=======
 >>>>>>> parent of 7678d99c (us other half placed)
   m_Father: {fileID: 590483948}
   m_RootOrder: 2
@@ -51044,7 +51093,10 @@ Transform:
   - {fileID: 1380572872}
   - {fileID: 1831389503}
 <<<<<<< HEAD
+<<<<<<< HEAD
   - {fileID: 1189577595}
+=======
+>>>>>>> parent of 7678d99c (us other half placed)
 =======
 >>>>>>> parent of 7678d99c (us other half placed)
   m_Father: {fileID: 590483948}
@@ -54937,7 +54989,11 @@ GameObject:
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
 <<<<<<< HEAD
+<<<<<<< HEAD
   m_IsActive: 0
+=======
+  m_IsActive: 1
+>>>>>>> parent of 7678d99c (us other half placed)
 =======
   m_IsActive: 1
 >>>>>>> parent of 7678d99c (us other half placed)
@@ -55985,7 +56041,9 @@ Transform:
   m_RootOrder: 5
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+>>>>>>> parent of 7678d99c (us other half placed)
 --- !u!1001 &1727189805
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -66158,7 +66216,11 @@ GameObject:
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
 <<<<<<< HEAD
+<<<<<<< HEAD
   m_IsActive: 0
+=======
+  m_IsActive: 1
+>>>>>>> parent of 7678d99c (us other half placed)
 =======
   m_IsActive: 1
 >>>>>>> parent of 7678d99c (us other half placed)
