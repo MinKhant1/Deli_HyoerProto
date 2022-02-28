@@ -58,9 +58,6 @@ public class Customer : MonoBehaviour
 
             Finish();
             finish = true;
-
-
-
         }
 
         if (OrderComplete && pathComplete())
