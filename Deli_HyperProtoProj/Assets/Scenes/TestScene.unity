@@ -3178,6 +3178,10 @@ PrefabInstance:
       propertyPath: m_AnchoredPosition.y
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 3708519061370668657, guid: ec582d54e5cdae74096dad6ac824d407, type: 3}
+      propertyPath: m_Type
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 3708519061664099923, guid: ec582d54e5cdae74096dad6ac824d407, type: 3}
       propertyPath: m_Name
       value: CompanyUi
